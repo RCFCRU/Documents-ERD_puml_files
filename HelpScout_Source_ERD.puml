@@ -1,0 +1,82 @@
+@startuml
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "CONVERSATION_HISTORY" as CONVERSATION_HISTORY {
+  *id: Primary Key
+  *updated_at: Primary Key
+  --
+  folder_id
+  mailbox_id
+  closed_by
+  primary_customer_id
+  number
+  threads
+  type
+  status
+  state
+  subject
+  preview
+  created_at
+  closed_at
+  source_type
+  source_via
+  customer_waiting_since
+  custom
+}
+
+entity "CONVERSATION_TAG_HISTORY" as CONVERSATION_TAG_HISTORY {
+  *conversation_id: Primary Key <<Foreign Key>>
+  *conversation_updated_at: Primary Key <<Foreign Key>>
+  *tag_id: Primary Key
+}
+
+entity "HAPPINESS_RATING" as HAPPINESS_RATING {
+  *conversation_id: Primary Key <<Foreign Key>>
+  *rating_customer_id: Primary Key <<Foreign Key>>
+  *rating_created_at:  Primary Key
+  --
+  number
+  thread_id
+  thread_created_at
+  type
+  rating_id
+  rating_comment
+  rating_customer_name
+  rating_user_id
+  rating_user_name
+}
+
+entity "CUSTOMER_HISTORY" AS CUSTOMER_HISTORY {
+  *id: Primary Key
+  *updated_at: Primary Key
+  --
+  first_name
+  last_name
+  gender
+  job_title
+  organization
+  location
+  photo_url
+  photo_type
+  age
+  created_at
+  background
+  address_city
+  address_state
+  address_postal_code
+  address_country
+  address_line
+}
+
+CONVERSATION_HISTORY ||..o{ CONVERSATION_TAG_HISTORY
+CONVERSATION_HISTORY ||..o{ HAPPINESS_RATING
+CONVERSATION_HISTORY }o..|| CUSTOMER_HISTORY
+HAPPINESS_RATING }o..|| CUSTOMER_HISTORY
+
+
+@enduml
