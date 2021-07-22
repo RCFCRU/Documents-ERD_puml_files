@@ -10,7 +10,7 @@ entity "CONVERSATION_HISTORY" as CONVERSATION_HISTORY {
   *id: Primary Key
   *updated_at: Primary Key
   --
-  folder_id
+  folder_id_2
   mailbox_id
   closed_by
   primary_customer_id
